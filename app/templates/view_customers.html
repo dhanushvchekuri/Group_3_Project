@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width:20%;
+            border-radius:20px;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <br>
+    <center>
+        <i class="material-icons large" style="">hotel</i>
+    <h4 class="center">ABC Hotel - View Customers and Bookings</h4>
+    </center>
+<ul class="collection">
+        {% for entry in customers_with_bookings %}
+        <li class="collection-item">
+            <h6><b>Customer:</b> {{ entry.customer.username }}</h6>
+            <p><b>Email:</b> {{ entry.customer.email }} | Phone: {{ entry.customer.phone }}</p>
+            <p><b>Address:</b>{{ entry.customer.address1 }} {% if entry.customer.address2 %}, {{ entry.customer.address2 }}{% endif %}, {{ entry.customer.city }}, {{ entry.customer.state_code }}, {{ entry.customer.zip_code }}, {{ entry.customer.country }}</p>
+            <h6><b>Bookings:</b></h6>
+            {% if entry.bookings %}
+            <ul>
+                {% for booking in entry.bookings %}
+                <li>Booking ID: {{ booking.id }}, Room: {{ booking.room.number }}, Check-in: {{ booking.check_in_date }}, Check-out: {{ booking.check_out_date }}</li>
+                {% empty %}
+                <li>No bookings found for this customer.</li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <ul>
+                    <li>No bookings found for this customer.</li>
+                </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+<center>
+    <a href="{% url 'admin_dashboard' %}" class="btn">Home</a>
+</center>
+</div>
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

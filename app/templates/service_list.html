@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width:20%;
+            border-radius:20px;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+
+        td,th{
+            border:1px solid gray;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/rooms/" style="padding-right:100px;">Search Rooms</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <br>
+    <center>
+        <i class="material-icons large" style="">hotel</i>
+    <h4 class="center">ABC Hotel - View Services</h4>
+    </center>
+{% if services %}
+  <table class="table striped centered">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Cost</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for service in services %}
+            <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.description }}</td>
+                <td>${{ service.additional_cost }}</td>
+                <td>
+                    <a href="{% url 'delete_service' service.id %}" style="color:#340a88;">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  {% else %}
+    <p class="center">
+      <b>No Services are there in system.</b>
+    </p>
+  {% endif %}
+
+
+<center>
+  <br><br>
+  <a href="{% url 'add_service' %}" class="btn btn-success">Add New Service</a>
+    <a href="{% url 'admin_dashboard' %}" class="btn">Home</a>
+</center>
+</div>
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

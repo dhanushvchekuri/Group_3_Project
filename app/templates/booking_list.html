@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width: 20%;
+            border-radius:20px;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/rooms/" style="padding-right:100px;">Search Rooms</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <h4 class="center-align">My Bookings</h4>
+
+
+    <div class="row">
+        {% if bookings %}
+            {% for booking in bookings %}
+                <div class="col s12 m6 l4">
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Booking #{{ booking.id }}</span>
+                            <p><strong>Room:</strong> {{ booking.room.number }} - {{ booking.room.get_room_type_display }}</p>
+                            <p><strong>Check-in Date:</strong> {{ booking.check_in_date }}</p>
+                            <p><strong>Check-out Date:</strong> {{ booking.check_out_date }}</p>
+                            <p><strong>Number of Guests:</strong> {{ booking.number_of_guests }}</p>
+                            <p><strong>Total Amount:</strong> ${{ booking.total_amount }}</p>
+                            <p><strong>Status:</strong> {% if booking.is_paid %}Paid{% else %}Unpaid{% endif %}</p>
+                        </div>
+                        <div class="card-action">
+                            <!-- Add any action buttons if necessary -->
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+        {% else %}
+            <p>You have no bookings.</p>
+        {% endif %}
+    </div>
+    <div class="center-align">
+<!--        <a href="{% url 'edit_profile' %}" class="btn">Edit Profile</a>-->
+        {% if request.user.is_staff %}
+        <a href="{% url 'admin_dashboard' %}" class="btn">Home</a>
+        {% else %}
+        <a href="{% url 'customer_dashboard' %}" class="btn">Home</a>
+        {% endif %}
+
+    </div>
+</div>
+
+
+
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

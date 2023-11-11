@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width: 60%;
+            border-radius:20px;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+</div>
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

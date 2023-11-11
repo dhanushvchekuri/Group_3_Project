@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width: 60%;
+            border-radius:20px;
+        }
+        select{
+          display:block;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/rooms/" style="padding-right:100px;">Search Rooms</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <center>
+        <i class="material-icons large" style="">hotel</i>
+     <h4 class="center">ABC Hotel - Rooms information</h4>
+    </center>
+
+  <!-- Search and Filter Form -->
+    <form action="{% url 'room_list' %}" method="get">
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="text" name="query" placeholder="Search by room number" value="{{ request.GET.query }}">
+          </div>
+        <div class="input-field col s6">
+          <select name="room_type">
+            <option value="">Filter by Room Type</option>
+            {% for type, name in room_types %}
+                <option value="{{ type }}" {% if selected_type == type %}selected{% endif %}>{{ name }}</option>
+            {% endfor %}
+        </select>
+        </div>
+      </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <input type="number" name="min_price" placeholder="Min Price" value="{{ request.GET.min_price }}">
+            </div>
+          <div class="input-field col s6">
+            <input type="number" name="max_price" placeholder="Max Price" value="{{ request.GET.max_price }}">
+
+            </div>
+        </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+          <input type="number" name="min_occupancy" placeholder="Min Occupancy" value="{{ request.GET.min_occupancy }}">
+          </div>
+        <div class="input-field col s6">
+          <input type="number" name="max_occupancy" placeholder="Max Occupancy" value="{{ request.GET.max_occupancy }}">
+          </div>
+      </div>
+
+        <button type="submit" class="btn" style="width:100px;">Search Rooms</button>
+    </form>
+
+ <div class="row">
+   <br>
+        {% for room in rooms %}
+
+        <div class="col s12 m4">
+            <div class="card" style="text-align:left;">
+                <div class="card-content">
+                    <span class="card-title">Room {{ room.number }} - {{ room.get_room_type_display }}</span>
+                    <p><strong>Description:</strong> {{ room.description }}</p>
+                    <p><strong>Price per Night:</strong> ${{ room.price_per_night }}</p>
+                    <p><strong>Max Occupancy:</strong> {{ room.max_occupancy }}</p>
+                    <p><strong>Status:</strong>
+                      {% if room.is_available %}
+                      Available
+                      {% else %}
+                        Booked
+                      {% endif %}
+                    </p>
+                </div>
+                <div class="card-action">
+                    {% if request.user.is_superuser %}
+                        <a href="/admin_rooms/delete/{{room.pk}}/" class="btn">Delete Room</a>
+                    {% else %}
+                        {% if room.is_available %}
+                        <a href="/book_room/{{room.pk}}/" class="btn">Book Now</a>
+                        {% else %}
+                        <button class="btn disabled">Not Available</button>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% empty %}
+        <div class="col s12">
+            <p>No rooms found.</p>
+        </div>
+        {% endfor %}
+     {% if request.user.is_superuser %}
+            <br>
+     <center>
+         <a href="/admin_rooms/add/" style="width:20%;" class="btn">Add Room</a>
+
+         <br><br>
+         <a href="/admin_dashboard" style="width:20%;" class="btn">Home</a>
+     </center>
+        {% endif %}
+    </div>
+
+
+    </div>
+
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

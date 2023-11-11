@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width: 60%;
+            border-radius:20px;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/rooms/" style="padding-right:100px;">Search Rooms</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <br>
+    <center>
+        <i class="material-icons large" style="">hotel</i>
+    <h4 class="center">ABC Hotel - Admin Dashboard</h4>
+    </center>
+
+    <div class="row">
+        <div class="col s12 m6">
+            <!-- Profile Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">person</i>
+                    <span class="card-title">My Profile</span>
+                    <p>View and update your admin profile information.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/customer_profile/">See Profile</a>
+                </div>
+            </div>
+        </div>
+         <div class="col s12 m6">
+            <!-- Profile Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">person</i>
+                    <span class="card-title">View Customers and Bookings</span>
+                    <p>View the all customers information.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/customer_profile_with_bookings/">See Customers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6">
+            <!-- Book New Room Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">book</i>
+                    <span class="card-title">Room Administration</span>
+                    <p>Add / delete hotel room for your hotel.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/rooms/">Manage Rooms</a>
+                </div>
+            </div>
+        </div>
+         <div class="col s12 m6">
+            <!-- Book New Room Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">room_service</i>
+                    <span class="card-title">Room Service Administration</span>
+                    <p>Add / remove additional service for your hotel.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/admin_services/">Manage Services</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+       <div class="row">
+           <div class="col s12 m6">
+            <!-- Logout Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">feedback</i>
+                    <span class="card-title">See Feedbacks</span>
+                    <p>Admin can see all customers feedback.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/feedbacks/list/">See Feedbacks</a>
+                </div>
+            </div>
+        </div>
+            <div class="col s12 m6">
+            <!-- Logout Card -->
+            <div class="card">
+                <div class="card-content">
+                    <i class="material-icons">exit_to_app</i>
+                    <span class="card-title">Logout</span>
+                    <p>Click the button below to log out of your account.</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn" href="/">Logout</a>
+                </div>
+            </div>
+        </div>
+           </div>
+    </div>
+</div>
+
+<!-- Modals for Profile, Booking, Previous Bookings, Feedback, and Logout -->
+<!-- You can add the modal content for each option here -->
+
+<!-- Include Materialize JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <!-- Include Materialize CSS -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <style>
+        .btn {
+            background-color: #340a88 !important;
+            color: white !important;
+            width: 20%;
+            border-radius:20px;
+        }
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked{
+    opacity:1;
+    vertical-align:middle !important;
+    margin-left:-1%;
+    margin-bottom:-20%;
+}
+        select{
+            display:block !important;
+        }
+        .card{
+            text-align:center !important;
+            border-radius:20px;
+        }
+        .material-icons{
+            color:#340a88 !important;
+            font-size:40px;
+        }
+        .card .card-action{
+            background-color: transparent !important;
+        }
+    </style>
+</head>
+<body>
+<div class="navbar-fixed" style="background-color:#340a88;color:white;">
+    <nav style="background-color:#340a88;color:white;">
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo" style="font-size:25px;padding-left:30px;">ABC Hotel</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/rooms/" style="padding-right:100px;">Search Rooms</a></li>
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+<div class="container">
+    <center>
+            <i class="material-icons">book</i>
+<h4 class="center-align">Book New Room</h4>
+    </center>
+
+
+    <!-- Edit Profile Button -->
+    <div class="">
+      <form method="post">
+        {% csrf_token %}
+        {{form|crispy}}
+        <br>
+        <center>
+          <button type="submit" class="btn">Submit</button>
+        </center>
+
+      </form>
+
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+    // Initialize Materialize modals
+    document.addEventListener('DOMContentLoaded', function() {
+        var modals = document.querySelectorAll('.modal');
+        M.Modal.init(modals);
+    });
+</script>
+</body>
+</html>
